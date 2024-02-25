@@ -51,6 +51,12 @@ User can see booked cars when clicks on My page button
     When User clicks on button My Page
     Then User should be able to see his/hers bookings
 
+Header checking
+    Given User is on homepage
+    When User clicks on About button
+    Then User clicks on Start button and is back on Start page
+
+
 *** Keywords ***
 Setup
     [Documentation]   Opens webpage
@@ -209,6 +215,27 @@ User should be able to see his/hers bookings
     [Tags]    VG_Test View booking2
     Page Should Contain Element    //h1[@id='historyText']
     Click Element    //button[@id='logout']
+
+User is on homepage
+    [Documentation]    Opening of homepage
+    [Tags]    VG_Test Header checking1
+    Open Browser    browser=Chrome
+    Go To    ${url}
+    Wait Until Element Is Visible    //h1[@id='questionText']
+
+User clicks on About button
+    [Documentation]    About button press
+    [Tags]    VG_Test Header checking2
+    Click Element    //a[@id='about']
+    Wait Until Element Is Visible    //label[contains(text(),'This project was created at an internship at Infot')]
+
+User clicks on Start button and is back on Start page
+    [Documentation]    Start button press
+    [Tags]    VG_Test Header checking3
+    Click Element    //div[@id='title']
+    Wait Until Element Is Visible    //h1[@id='questionText']
+
+
 
 
 
