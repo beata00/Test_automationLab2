@@ -2,7 +2,6 @@
 Documentation   Lab work2
 Library    SeleniumLibrary
 
-
 *** Variables ***
 ${url}  http://rental11.infotiv.net/
 ${email}    beata@gmail.se
@@ -24,8 +23,8 @@ Car booking
     And User is inlogged    ${email}    ${pass}
     When User chooses dates and car model
     And User pays by credit card
-    Then Booked car is visible on My page
-    And Cancel car
+    Then The booked car is visible on My page
+    And The user cancels the booked car
 
 Log in successfully
     Given User is on homepage
@@ -42,16 +41,16 @@ User can't book car without logging in
     When User chooses dates    ${start_date}    ${end_date}
     Then User gets an alert when trying to book chosen car
 
-Header navigation
+Navigating between homepage and About page
     Given User is on homepage
-    When User is going to About page
-    Then User is going back to Start page
+    When The user navigates to About page
+    Then The user is back on Start page
 
-Booking history
+Displaying previously booked car in my order history
     Given User is on homepage
     And User is inlogged    ${email}    ${pass}
-    When User goes to My Page
-    Then Booking history is visible
+    When The user goes to my Page
+    Then The user could access history of previously booked cars
 
 *** Keywords ***
 User is on homepage
@@ -120,15 +119,15 @@ User pays by credit card
     Click Button    //button[@id='confirm']
     Wait Until Element Is Visible    //h1[@id='questionTextSmall']
 
-Booked car is visible on My page
+The booked car is visible on My page
     [Documentation]    Booked car
     [Tags]     VG_test My page
     Click Button    //button[@id='mypage']
     Wait Until Element Is Visible    //button[@id='unBook1']
 
-Cancel car
+The user cancels the booked car
     [Documentation]    Cancel booked car
-    [Tags]     VG_test unbook
+    [Tags]     VG_test Unbook
     Click button    //button[@id='unBook1']
     Handle Alert
     Wait Until Page Contains    Your car: BBE465 has been Returned
@@ -140,25 +139,25 @@ User gets an alert when trying to book chosen car
     Click button    (//input[@id='bookVivaropass9'])[2]
     Alert Should Be Present    You need to be logged in to continue.
 
-User is going to About page
+The user navigates to About page
     [Documentation]    Checking About page
     [Tags]    VG_Test Header navigation 1
     Click Element    //a[@id='about']
     Wait Until Element Is Visible    //label[contains(text(),'This project was created at an internship at Infot')]
 
-User is going back to Start page
+The user is back on Start page
     [Documentation]    Getting back to Start page
     [Tags]    VG_Test navigation 2
     Click Element    //div[@id='title']
     Wait Until Element Is Visible    //h1[@id='questionText']
 
-User goes to My Page
+The user goes to My Page
     [Documentation]   Navigating to my page
     [Tags]    VG_Test MyPage
     Click Button    //button[@id='mypage']
     Wait Until Element Is Visible    //button[@id='hide']
 
-Booking history is visible
+The user could access history of previously booked cars
     [Documentation]    History
     [Tags]    VG_Test History
     Click Button    //button[@id='show']
